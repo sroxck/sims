@@ -1,5 +1,5 @@
-const { default: Compiler } = require("./compiler");
-const { default: Observer } = require("./observer");
+const { default: Compiler } = require("../../compiler");
+const { default: Observer } = require("../observer");
 
 class Sims{
     constructor(options){

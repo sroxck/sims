@@ -1,10 +1,12 @@
-import Watcher from "./watcher"
-
+import Watcher from "../core/observer/watcher"
+import { parse } from './parser'
 export default class Compiler {
 	constructor(context) {
 		this.$el = context.$el// 数据转存
 		this.context = context
 		if (this.$el) {
+			let AST = parse(this.$el.outerHTML)
+			console.log(AST);
 			// 1 把原始dom转换为documentFragment文档片段
 			this.$fragment = this.nodeToFragment(this.$el)
 			// 编译模板
@@ -66,9 +68,7 @@ export default class Compiler {
 		let that = this
 		// TODO 完成元素的编译,包含指令等
 		let attrs = [...node.attributes]
-		console.log(attrs)
 		attrs.forEach(attr => {
-			console.log(attr);
 			let { name: attrName, value: attrValue } = attr
 			if (attrName.indexOf("s-") === 0) {
 				let dirName = attrName.slice(2);
@@ -79,14 +79,16 @@ export default class Compiler {
 						})
 						break;
 					case "model":
-						new Watcher(attrValue, this.context, newValue => {
-							node.value = newValue
-						})
-						node.addEventListener("input",e=>{
-							that.context[attrValue] = e.target.value
-						})
+						if(node.tagName.toLowerCase() === 'input'){
+							new Watcher(attrValue, this.context, newValue => {
+								node.value = newValue
+							})
+							node.addEventListener("input",e=>{
+								that.context[attrValue] = e.target.value
+							})
+							
+						}
 						break;
-
 				}
 			}
 			if (attrName.indexOf("@") === 0 ){
@@ -106,7 +108,6 @@ export default class Compiler {
 		// 获取类型
 		let type = attrName.slice(1)
 		let fn = scope[attrValue]
-		console.log(scope);
 		node.addEventListener(type,fn.bind(scope))
 	}
 	/**
@@ -115,11 +116,9 @@ export default class Compiler {
 	 */
 	compilerTextNode(node) {
 		let text = node.textContent.trim()
-		console.log(text, this);
 		if (text) {
 			// 把text字符串转换成表达式
 			let exp = this.parseTextExp(text)
-			console.log(exp);
 			// 添加订阅者,计算表达式的值
 			new Watcher(exp, this.context, (newValue) => {
 				node.textContent = newValue
@@ -144,7 +143,6 @@ export default class Compiler {
 		let pices = text.split(regText)
 		// 匹配差值表达式
 		let matches = text.match(regText)
-		console.log(matches, '22');
 		// 表达式数组
 		let tokens = []
 		pices.forEach(item => {

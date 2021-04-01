@@ -24,7 +24,6 @@ export default class Watcher{
      */
     update(){
         let newValue = this.get();
-        console.log(newValue);
         this.cb && this.cb(newValue)
     }
     /**
