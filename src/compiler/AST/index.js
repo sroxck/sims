@@ -1,4 +1,5 @@
 import { parseHTML } from './parseHTML'
+import {addHandle,addAttr,addDirective}from '../helper'
 /**
  * 
  * @param {*} template 要解析的模板
@@ -23,10 +24,12 @@ export function parse(template) {
                 type:1,
                 tag,
                 attrslist:attrs,
+                attrsMap:makeAttrsMap(attrs),
                 parent:currentParent,
                 children:[]
             }
             // TODO 属性处理
+            
             // 第一次进入开始标签说明是根节点
             // 所以vue根节点必须只有一个
             if(!root){
@@ -66,4 +69,15 @@ export function parse(template) {
         }
     })
     return root
+}
+/**
+ * 把数组形式的属性转换为键值对
+ * @param {*} attrs 属性
+ */
+function makeAttrsMap(attrs) {
+    const map = {}
+    for(let i= 0,l=attrs.length;i<l;i++){
+        map[attrs[i].name] = attrs[i].value
+    }
+    return map
 }

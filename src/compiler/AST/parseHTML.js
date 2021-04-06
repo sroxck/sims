@@ -170,6 +170,7 @@ export function parseHTML(temp, options) {
             // 如果end就是匹配到的 > 或者 />
             if(end){
                 // 自闭和标签 end[1]是 / 否则 end[1]是 ''  end匹配出来的是组 分0 和1  0是>
+                console.log(end,'enenen');
                 match.isUnary = end[1]
                 match.end = index
                 advance(end[0].length)

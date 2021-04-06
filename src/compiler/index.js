@@ -1,5 +1,5 @@
 import Watcher from "../core/observer/watcher"
-import { parse } from './parser'
+import { parse } from './AST'
 export default class Compiler {
 	constructor(context) {
 		this.$el = context.$el// 数据转存
