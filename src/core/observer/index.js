@@ -16,6 +16,7 @@ export default class Observer{
             this.defineReactive(data,key,data[key])
         })
     }
+    
     /**
      * 动态设置响应式数据
      * @param {*} data 

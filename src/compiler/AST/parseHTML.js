@@ -14,8 +14,9 @@ const comment = /^<!--/
  * @param {*} temp 模板字符串
  * @param {*} options 回调函数配置
  */
+
 export function parseHTML(temp, options) {
-    console.log(temp, '333');
+    // console.log(temp, '333');
     // 用于存放临时找到的开始标签和属性
     // 当找到了对应的结束标签的时候,则说明html格式正确,否则报错提示
     let checkStack = []
@@ -89,6 +90,7 @@ export function parseHTML(temp, options) {
                 value:match.attrs[i][3] 
             }
         }
+        console.log(`%c↓↓匹配标签的属性↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
         console.log(attrs,'attrs');
         //判断是不是单标签
         let isunary = isUnaryTag(tagName) || !!unaryTag
@@ -146,6 +148,7 @@ export function parseHTML(temp, options) {
     function parseStartTag() {
         ///匹配开始标签
         const start = html.match(startTagOpen)
+        console.log(`%c↓↓匹配开始标签↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
         console.log(start,'start开始标签');
         if (start) {
             let match = {
@@ -164,6 +167,7 @@ export function parseHTML(temp, options) {
                 // 2: "="
                 // 3: "app"
                 match.attrs.push(attr)
+                // console.log(attr);
                 advance(attr[0].length)
             }
             console.log(match,'match');
@@ -186,6 +190,7 @@ export function parseHTML(temp, options) {
     function advance(n) {
         index += n
         html = html.substring(n)
+        console.log(`%c↓↓截取后的模板字符串↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
         console.log(html,'html截取的');
     }
     /**

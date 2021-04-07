@@ -2,11 +2,13 @@ import { parseHTML } from './parseHTML'
 import {addHandle,addAttr,addDirective}from '../helper'
 /**
  * 
- * @param {*} template 要解析的模板
+ * @param {*} template 要解析的模板字符串
  * @returns 
  */
 export function parse(template) {
-    console.log(template,'template');
+    console.log(`%c↓↓模板字符串↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
+
+    console.log(template,'模板字符串');
     //最终返回出去的AST对象
     let root 
     // 当前元素的父级元素
@@ -68,6 +70,7 @@ export function parse(template) {
             }
         }
     })
+    
     return root
 }
 /**

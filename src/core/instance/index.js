@@ -17,6 +17,7 @@ class Sims{
         new Compiler(this)
 
     }
+    
     /**
      * 数据的代理
      * 这个函数是为了能直接通过vm.msg拿到数据而不用vm.$data, 就是把$data里面的数据都劫持到vm里面

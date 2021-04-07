@@ -19,6 +19,7 @@ export default class Compiler {
 	 * 把所有的元素转换为文档片段
 	 * @param {*} node 
 	 */
+	
 	nodeToFragment(node) {
 		let fragment = document.createDocumentFragment()
 		if (node.childNodes && node.childNodes.length) {
