@@ -10,6 +10,7 @@ export function parse(template) {
 
     console.log(template,'模板字符串');
     //最终返回出去的AST对象
+    
     let root 
     // 当前元素的父级元素
     let currentParent

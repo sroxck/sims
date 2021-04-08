@@ -20,6 +20,8 @@ export default class Compiler {
 	 * @param {*} node 
 	 */
 	
+
+	
 	nodeToFragment(node) {
 		let fragment = document.createDocumentFragment()
 		if (node.childNodes && node.childNodes.length) {
@@ -47,8 +49,8 @@ export default class Compiler {
 	 * @param {*} node 
 	 */
 	compiler(node) {
-		// 创建一个空白的文档片段 let fragment = document.createDocumentFragment() fragment是一个指向空DocumentFragment对象的引用
-		// 有更好的性能
+		// 创建一个空白的文档片段 document.createDocumentFragment() fragment是一个指向空DocumentFragment对象的引用
+		// Fragment比dom有更好的性能
 		if (node.childNodes && node.childNodes.length) {
 			node.childNodes.forEach(child => {
 				if (child.nodeType === 1) {
@@ -133,7 +135,7 @@ export default class Compiler {
 	/**
 	 * 此函数完成了文本到表达式的转换
 	 * 输入 111{{msg + '222'}}333
-	 * 输出 '111'+ msg + '222' + '333'
+	 * 输出 '111'+ (msg + '222') + '333'
 	 * 返回表达式
 	 * @param {*} text 
 	 */

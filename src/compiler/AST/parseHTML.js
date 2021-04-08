@@ -5,6 +5,7 @@ const qnameCapture = `((?:${ncname}\\:)?${ncname})`
 const startTagOpen = new RegExp(`^<${qnameCapture}`)
 // 匹配开始标签结束部分
 const startTagClose = /^\s*(\/?)>/
+
 // 匹配结束标签
 const endTag = new RegExp(`^<\/${qnameCapture}[^>]*>`)
 // 匹配注释
