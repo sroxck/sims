@@ -7,6 +7,8 @@ export default class Compiler {
 		if (this.$el) {
 			let AST = parse(this.$el.outerHTML)
 			console.log(AST);
+			this.h(AST)
+			console.log(this.h(AST));
 			// 1 把原始dom转换为documentFragment文档片段
 			this.$fragment = this.nodeToFragment(this.$el)
 			// 编译模板
@@ -21,7 +23,42 @@ export default class Compiler {
 	 */
 	
 
-	
+	h(ast){
+		let root
+		if(ast.parent == undefined){
+			if(ast.type == 1){
+				root = document.createElement(ast.tag)
+				ast.attrslist.forEach(item=>{
+					console.log(item);
+					root.setAttribute(item.name,item.value)
+				})
+			}
+			let child
+			ast.children.forEach(item=>{
+				if(item.type == 1){
+					 child = document.createElement(item.tag)
+
+					item.attrslist.forEach(item1=>{
+						if(item1.name.indexOf('@') != -1){
+							let str = item1.name.slice('1')
+						child.setAttribute(`v-on:${str}`,item1.value)
+
+						}else{
+						child.setAttribute(item1.name,item1.value)
+
+						}
+					})
+					root.appendChild(child)
+				}
+				item.children.forEach(k=>{
+					if(k.type == 2){
+						child.innerHTML = k.text
+					}
+				})
+			})
+		}
+		return root
+	}
 	nodeToFragment(node) {
 		let fragment = document.createDocumentFragment()
 		if (node.childNodes && node.childNodes.length) {
