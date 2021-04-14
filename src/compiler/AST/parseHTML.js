@@ -32,9 +32,7 @@ export function parseHTML(temp, options) {
             // 优先判断是不是注释
             if (html.match(comment)) {
                 const commentEnd = html.indexOf('-->')
-                if (commentEnd >= 0) {
-                    //todo 匹配到注释,回调函数
-                }
+                if (commentEnd >= 0) {}
                 advance(commentEnd + 3)
                 continue
             }
@@ -80,11 +78,7 @@ export function parseHTML(temp, options) {
         // 属性处理
         let attrs = []
         attrs.length = match.attrs.length
-        // 正则匹配到的属性
-        // 0: "id="app""
-        // 1: "id"
-        // 2: "="
-        // 3: "app"
+       
         for (let i = 0; i < attrs.length; i++) {
             attrs[i] = {
                 name:match.attrs[i][1],
@@ -162,19 +156,14 @@ export function parseHTML(temp, options) {
             // 匹配开始标签的结束符号,如果匹配成则结束,如果没匹配到则匹配属性
             // 如果匹配到属性则添加到match的attrs中
             while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
-                 // 正则匹配到的属性
-                // 0: "id="app""
-                // 1: "id"
-                // 2: "="
-                // 3: "app"
+               
                 match.attrs.push(attr)
                 // console.log(attr);
                 advance(attr[0].length)
             }
             console.log(match,'match');
-            // 如果end就是匹配到的 > 或者 />
             if(end){
-                // 自闭和标签 end[1]是 / 否则 end[1]是 ''  end匹配出来的是组 分0 和1  0是>
+                // 自闭和标签 end[1]是 / 否则 end[1]是 '' >
                 console.log(end,'enenen');
                 match.isUnary = end[1]
                 match.end = index

@@ -11,13 +11,11 @@ export function parse(template) {
 
     console.log(template,'模板字符串');
     //最终返回出去的AST对象
-    
     let root 
     // 当前元素的父级元素
     let currentParent
     // 生成AST的临时栈
     let stack = []
-    //假设可以获取到开始,结束标签和纯文本
     parseHTML(template,{
         //匹配开始标签
         start:(tag,attrs,unary)=>{
@@ -33,9 +31,7 @@ export function parse(template) {
                 children:[]
             }
             // TODO 属性处理
-            
             // 第一次进入开始标签说明是根节点
-            // 所以vue根节点必须只有一个
             if(!root){
                 root = element
             }
