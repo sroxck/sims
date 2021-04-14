@@ -21,7 +21,7 @@ export function parse(template) {
         start:(tag,attrs,unary)=>{
             // 创建AST元素
             // type,tag,parent,children,attrlist
-            let element = {
+            let element = { 
                 // 自定义type:1 元素节点,2 纯文本
                 type:1,
                 tag,
