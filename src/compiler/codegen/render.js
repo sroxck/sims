@@ -20,7 +20,6 @@ export function render(AST) {
 
                     } else {
                         child.setAttribute(item1.name, item1.value)
-
                     }
                 })
                 root.appendChild(child)

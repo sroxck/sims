@@ -17,13 +17,11 @@ const comment = /^<!--/
  */
 
 export function parseHTML(temp, options) {
-    // console.log(temp, '333');
-    // 用于存放临时找到的开始标签和属性
-    // 当找到了对应的结束标签的时候,则说明html格式正确,否则报错提示
+    // 
     let checkStack = []
     // 转存模板 用于分析并截取
     let html = temp
-    // 当前已分析到的字符串索引的位置
+    // 字符串索引位置
     let index = 0
     while (html) {
         const textStart = html.indexOf('<')
@@ -44,7 +42,6 @@ export function parseHTML(temp, options) {
             // 判断是否是结束标签
             const endTagMatch = html.match(endTag)
             if(endTagMatch){
-                console.log(endTagMatch,'endTagMatchend');
                 advance(endTagMatch[0].length)
                 //TODO 
                 parseEndTag(endTagMatch[1])
@@ -59,7 +56,6 @@ export function parseHTML(temp, options) {
         // 小于0 说明是纯文本
         if (textStart < 0){
             text = html
-            console.log(text,html,'text-html textStatr <0');
             html = ''
         }
         // 处理纯文本
@@ -85,8 +81,6 @@ export function parseHTML(temp, options) {
                 value:match.attrs[i][3] 
             }
         }
-        console.log(`%c↓↓匹配标签的属性↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
-        console.log(attrs,'attrs');
         //判断是不是单标签
         let isunary = isUnaryTag(tagName) || !!unaryTag
         //如果不是
@@ -107,15 +101,14 @@ export function parseHTML(temp, options) {
      * @param {*} tagName 标签名称
      */
     function parseEndTag(tagName) {
-
-        // console.log(tagName,"tagNametagName");
+        // 
         let pos,lowerCaseTagName
         if(tagName){
             lowerCaseTagName = tagName.toLowerCase()
-            // console.log(lowerCaseTagName,'lowerCaseTagNamelowerCaseTagName');
+            // 
             // 从数组的最后一位开始匹配有没有对应的开始标签
             for (pos = checkStack.length-1; pos >= 0; pos--) {
-                // console.log(checkStack[pos].lowerCaseTag,'checkStack[pos].lowerCaseTag');
+                // 
                 if(checkStack[pos].lowerCaseTag === lowerCaseTagName){
                     break
                 }
@@ -127,7 +120,7 @@ export function parseHTML(temp, options) {
         if(pos>=0){
             for (let i = checkStack.length-1; i >= pos; i--) {
                 if(i>pos || !tagName){
-                    console.warn(`标签 ${checkStack[i].tag}没有匹配的闭合标签`)
+                    
                     throw `标签 ${checkStack[i].tag}没有匹配的闭合标签`
                 } 
                 options.end && options.end()       
@@ -143,8 +136,6 @@ export function parseHTML(temp, options) {
     function parseStartTag() {
         ///匹配开始标签
         const start = html.match(startTagOpen)
-        console.log(`%c↓↓匹配开始标签↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
-        console.log(start,'start开始标签');
         if (start) {
             let match = {
                 tagName: start[1],
@@ -158,13 +149,11 @@ export function parseHTML(temp, options) {
             while (!(end = html.match(startTagClose)) && (attr = html.match(attribute))) {
                
                 match.attrs.push(attr)
-                // console.log(attr);
+                // 
                 advance(attr[0].length)
             }
-            console.log(match,'match');
             if(end){
                 // 自闭和标签 end[1]是 / 否则 end[1]是 '' >
-                console.log(end,'enenen');
                 match.isUnary = end[1]
                 match.end = index
                 advance(end[0].length)
@@ -180,8 +169,6 @@ export function parseHTML(temp, options) {
     function advance(n) {
         index += n
         html = html.substring(n)
-        console.log(`%c↓↓截取后的模板字符串↓↓`," text-shadow: 0 1px 0 #ccc;font-size:16px")
-        console.log(html,'html截取的');
     }
     /**
      * 判断标签是不是单标签
