@@ -13,6 +13,7 @@ export function render(AST) {
             if (item.type == 1) {
                 child = document.createElement(item.tag)
 
+                
                 item.attrslist.forEach(item1 => {
                     if (item1.name.indexOf('@') != -1) {
                         let str = item1.name.slice('1')
