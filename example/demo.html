@@ -19,21 +19,10 @@
 </body>
 </html>
 <script>
-    let div = document.createElement('div')
-    let p = document.createElement('p')
-    div.appendChild(p)
-    let str = document.createTextNode('333')
-    // div.innerText = '333'
-    div.appendChild(str)
-
-    console.log(div);
     var sims = new Sims({
         el:"#app",
         data:{
             message:' 这是一个demo ',
-            ss:{
-                aa:'33'
-            }
         },
         methods:{
             handle(){
@@ -42,6 +31,7 @@
         },
         created(){
             // todo 编译钩子
+            console.log(232,this);
         }
     })
 </script>

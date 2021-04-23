@@ -10,9 +10,10 @@ export default class Compiler {
 		if (this.$el) {
 			let AST = parse(this.$el.outerHTML)
 			console.log(AST);
-			console.log(render(AST),'render');
+			// console.log(render(AST),'render');
 			// 1 把原始dom转换为documentFragment文档片段
 			this.$fragment = this.nodeToFragment(this.$el)
+			this.context.$created()
 			// 编译模板
 			this.compiler(this.$fragment)
 			// 把文档片段添加到页面中

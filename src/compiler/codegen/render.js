@@ -1,36 +1,34 @@
-export function render(AST) {
-    let root
-    if (AST.parent == undefined) {
-        if (AST.type == 1) {
-            root = document.createElement(AST.tag)
-            AST.attrslist.forEach(item => {
-                console.log(item);
-                root.setAttribute(item.name, item.value)
-            })
-        }
-        let child
-        AST.children.forEach(item => {
-            if (item.type == 1) {
-                child = document.createElement(item.tag)
-
-                
-                item.attrslist.forEach(item1 => {
-                    if (item1.name.indexOf('@') != -1) {
-                        let str = item1.name.slice('1')
-                        child.setAttribute(`s-on:${str}`, item1.value)
-
-                    } else {
-                        child.setAttribute(item1.name, item1.value)
+function render(AST) {
+    const element = document.createElement(AST.tag)
+    AST.attrslist.forEach(attr => {
+        element.setAttribute(attr.name, attr.value)
+    });
+    handleChildrenElement(AST.children, element)
+    return element
+}
+function handleChildrenElement(AST, root) {
+    if(AST instanceof Array){
+        AST.forEach(item => {
+            if (item.type === 1) {
+                const element = document.createElement(item.tag)
+                item.attrslist.forEach(attr => {
+                    if(attr.name.indexOf('tag-model') != -1){
+                        attr.value = attr.value.replace(/&nbsp;/g,' ')
+                        attr.value = attr.value.replace(/&gt;/g,'>')
+                        attr.value = attr.value.replace(/&lt;/g,'<')
+                        attr.value = attr.value.replace(/&quot;/g,'"')
+                        attr.value = attr.value.replace(/&quot;/g,'"')
+                        attr.value = attr.value.replace(/&apos;/g,`'`)
+                        item[attr.name] = attr.value
                     }
-                })
-                root.appendChild(child)
+                    element.setAttribute(attr.name, attr.value)
+                });
+                // 添加到父级
+                root.appendChild(element)
+                item.children &&item.children.length>0&& handleChildrenElement(item.children, element)
+            } else if (item.type === 2 ) {
+                root.innerHTML += item.text
             }
-            item.children.forEach(k => {
-                if (k.type == 2) {
-                    child.innerHTML = k.text
-                }
-            })
-        })
+        });
     }
-    return root
 }

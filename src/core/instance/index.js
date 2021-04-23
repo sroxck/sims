@@ -10,7 +10,7 @@ class Sims{
         // 数据和函数的代理
         this._proxyData(this.$data)
         this._proxyMethods(options.methods)
-
+        this.$created = options.created
         // 数据劫持
         new Observer(this.$data)
         // 模板编译
