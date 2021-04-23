@@ -2,6 +2,7 @@ import Watcher from "../core/observer/watcher"
 import { parse } from './AST'
 import { render } from './codegen/render'
 
+
 export default class Compiler {
 	constructor(context) {
 		this.$el = context.$el// 数据转存

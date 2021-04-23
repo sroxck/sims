@@ -33,7 +33,7 @@ export default class Observer{
             get:() =>{
                 // 如果dep.target有东西就添加
                 Dep.target && dep.addSub(Dep.target)
-                console.log("get");
+                // console.log("get");
                 return value // 闭包形式存储的value
             },
             set:(newValue) =>{

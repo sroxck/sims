@@ -11,13 +11,22 @@
     <div id="app">
         <p>**{{message.trim()}}**</p>
         <p s-text="message"></p>
+        <div><div>444</div></div>
         <!-- 这是注释内容 -->
         <input type="text" s-model="message">
-        <button @click="handle">按钮</button>
+        <button click="handle">按钮</button>
 </div>  
 </body>
 </html>
 <script>
+    let div = document.createElement('div')
+    let p = document.createElement('p')
+    div.appendChild(p)
+    let str = document.createTextNode('333')
+    // div.innerText = '333'
+    div.appendChild(str)
+
+    console.log(div);
     var sims = new Sims({
         el:"#app",
         data:{

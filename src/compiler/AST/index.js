@@ -25,7 +25,7 @@ export function parse(template) {
                 tag,
                 attrslist:attrs,
                 attrsMap:makeAttrsMap(attrs),
-                parent:currentParent,
+                // parent:currentParent,
                 children:[]
             }
             // TODO 属性处理
@@ -37,7 +37,7 @@ export function parse(template) {
                 // 如果有父级元素,那么设置当前元素添加到父级元素的children里
                 // 然后设置当前元素的parent属性就是当前的父级元素
                 currentParent.children.push(element)
-                element.parent = currentParent
+                // element.parent = currentParent
             }
             if(!unary){
                 currentParent = element
