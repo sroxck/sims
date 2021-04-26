@@ -3,6 +3,7 @@ function render(AST) {
     AST.attrslist.forEach(attr => {
         element.setAttribute(attr.name, attr.value)
     });
+    
     handleChildrenElement(AST.children, element)
     return element
 }
