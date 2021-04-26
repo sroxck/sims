@@ -3,9 +3,11 @@ import { parse } from './AST'
 import { render } from './codegen/render'
 export default class Compiler {
 	constructor(context) {
-		this.$el = context.$el// 数据转存
 		this.context = context
+		this.$el = context.$el// 数据转存
 		if (this.$el) {
+
+			
 			let AST = parse(this.$el.outerHTML)
 			console.log(AST);
 			// console.log(render(AST),'render');
