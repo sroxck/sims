@@ -6,7 +6,6 @@ function render(AST) {
     handleChildrenElement(AST.children, element)
     return element
 }
-
 function handleChildrenElement(AST, root) {
     if(AST instanceof Array){
         AST.forEach(item => {
