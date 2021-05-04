@@ -13,7 +13,6 @@ export default class Compiler {
 			this.$fragment = this.nodeToFragment(this.$el)
 			this.context.$created()
 			// 编译模板
-			
 			this.compiler(this.$fragment)
 			// 把文档片段添加到页面中
 			this.$el.appendChild(this.$fragment)
