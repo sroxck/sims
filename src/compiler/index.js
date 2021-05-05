@@ -16,6 +16,7 @@ export default class Compiler {
 			this.compiler(this.$fragment)
 			// 把文档片段添加到页面中
 			this.$el.appendChild(this.$fragment)
+			
 		}
 	}
 	/**
