@@ -12,7 +12,6 @@ export default class Compiler {
 			// 1 把原始dom转换为documentFragment文档片段
 			this.$fragment = this.nodeToFragment(this.$el)
 			this.context.$created()
-			
 			// 编译模板
 
 			this.compiler(this.$fragment)
