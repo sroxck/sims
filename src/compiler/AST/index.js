@@ -5,7 +5,6 @@ import {addHandle,addAttr,addDirective}from '../helper'
  * @param {*} template 要解析的模板字符串
  * @returns 
  */
-
 export function parse(template) {
     //最终返回出去的AST对象
     let root 
