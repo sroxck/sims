@@ -7,7 +7,6 @@ import {addHandle,addAttr,addDirective}from '../helper'
  */
 
 export function parse(template) {
-
     //最终返回出去的AST对象
     let root 
     // 当前元素的父级元素
