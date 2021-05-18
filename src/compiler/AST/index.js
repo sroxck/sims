@@ -6,6 +6,7 @@ import {addHandle,addAttr,addDirective}from '../helper'
  * @returns 
  */
 
+
 export function parse(template) {
     //最终返回出去的AST对象
     let root 
